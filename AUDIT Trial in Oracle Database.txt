@@ -1,0 +1,138 @@
+SQL> SHOW PARAMETER AUDIT
+SQL> ALTER SYSTEM SET audit_trail=db SCOPE=SPFILE;
+SQL> SHUTDOWN IMMEDIATE
+SQL> STARTUP
+SQL> ALTER SYSTEM SET audit_trail=db,extended scope=spfile;
+SQL> ALTER SYSTEM SET audit_sys_operations=true scope=spfile;
+SQL> shut immediate
+SQL> startup
+
+sql>AUDIT ALL BY student BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY student BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY student BY ACCESS;
+   
+
+sql>AUDIT ALL BY enrolment BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY enrolment BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY enrolment BY ACCESS;
+
+
+sql>AUDIT ALL BY ssuetlis BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY ssuetlis BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY ssuetlis BY ACCESS;
+
+sql>AUDIT ALL BY stu BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY stu BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY stu BY ACCESS;
+
+
+sql>AUDIT ALL BY stu BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY stu BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY stu BY ACCESS;
+
+
+sql>AUDIT ALL BY hr BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY hr BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY hr BY ACCESS;
+
+
+sql>AUDIT ALL BY inventory BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY inventory BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY inventory BY ACCESS;
+
+sql>AUDIT ALL BY ssuet_sas BY ACCESS;
+sql>AUDIT SELECT TABLE, UPDATE TABLE, INSERT TABLE, DELETE TABLE BY ssuet_sas BY ACCESS;
+sql>AUDIT EXECUTE PROCEDURE BY ssuet_sas BY ACCESS;
+
+
+SELECT username, obj_name, sql_text FROM dba_audit_trail
+
+SELECT username,
+       extended_timestamp,
+       owner,
+       obj_name,terminal,
+       action_name,SQL_TEXT 
+FROM   dba_audit_trail
+ORDER BY timestamp;
+
+
+DELETE FROM sys.aud$;
+
+DELETE FROM sys.aud$ WHERE obj$name='';
+
+SELECT  FROM sys.aud$
+
+best report
+------------
+SELECT OS_USERNAME,terminal,userhost,logoff_time,
+       timestamp,username,
+       owner,
+       obj_name,
+       action_name,ADMIN_OPTION,sql_bind, SQL_TEXT,EXTENDED_TIMESTAMP
+       FROM   dba_audit_trail
+
+delete audit records
+---------------
+       DELETE FROM sys.aud$;
+       commit;
+    
+
+
+NO AUDIT 
+------------------------
+
+
+SQL> NOAUDIT;
+SQL> NOAUDIT session;
+SQL> NOAUDIT session BY scott, hr;
+SQL> NOAUDIT DELETE ON emp;
+SQL> NOAUDIT SELECT TABLE, INSERT TABLE, DELETE TABLE, EXECUTE PROCEDURE;
+SQL> NOAUDIT ALL;
+SQL> NOAUDIT ALL PRIVILEGES;
+SQL> NOAUDIT ALL ON DEFAULT;
+
+
+
+
+
+To turn off all default object audit options, enter the following statement:
+NOAUDIT ALL  ON DEFAULT;
+
+
+
+CHECK AUDIT PREVILEDGES
+-----------------------------
+
+select user_name, privilege from dba_priv_audit_opts;
+
+To enable network auditing run the following command:
+
+SQL> AUDIT NETWORK;
+
+To disable network auditing, enter the following:
+
+SQL> NOAUDIT NETWORK;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
