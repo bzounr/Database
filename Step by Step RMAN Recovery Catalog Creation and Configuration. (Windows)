@@ -1,0 +1,110 @@
+Step by Step RMAN Recovery Catalog Creation and Configuration. (Windows)
+Step by Step RMAN Recovery Catalog Creation and Configuration. (Windows)
+The RMAN Recovery Catalog is a database schema that holds the metadata detailing the RMAN backup operations performed on the target database. The metadata include the following information from about the target database: database structure, RMAN configuration, data file and archive log backups (backup sets, pieces and copies), archived redo logs and their copies. In addition to the metadata the recovery catalog can also store scripts that can be used by all registered target databases.
+This document will detail the steps to create an RMAN recovery catalog using Oracle Database 11gR2 on Windows OS. The process is the same for other versions of UNIX, Solaris and AIX.
+It is recommended that the recovery catalog be in a database separate from any of the target databases. Many organizations store the recovery catalog in the same database as their Enterprise Manager Grid Control repository. It is also recommended that the database that houses the recovery catalog to be in ARCHIVELOG mode. In this demo I am using catalog database with the name of CATDB.
+First create a table space to house the recovery catalog schema.
+C:\Users\rajjha>set oracle_sid=catdb
+C:\Users\rajjha>sqlplus
+SQL*Plus: Release 11.2.0.1.0 Production on Mon Jul 8 22:05:19 2013
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+Enter user-name: sys as sysdba
+Enter password:
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 – Production
+With the Partitioning, OLAP, Data Mining and Real Application Testing options
+SQL> create tablespace rec_catalog
+     datafile ‘D:\app\rajjha\oradata\CATDB\rec_catalog.dbf’
+     size 10M autoextend on
+     extent management local uniform size 1M;
+Next we create the recovery catalog owner. The user SYS cannot be the owner of the recovery catalog.
+SQL> create user rcat identified by password
+    default tablespace rec_catalog
+    quota unlimited on rec_catalog;
+User created.
+SQL> grant recovery_catalog_owner to rcat;
+Grant succeeded.
+The role RECOVERY_CATALOG_OWNER has all of the privileges need to query and maintain the recovery catalog.
+SQL> select privilege from dba_sys_privs where grantee = ‘RECOVERY_CATALOG_OWNER’;
+
+PRIVILEGE
+—————————————-
+CREATE SYNONYM
+CREATE CLUSTER
+ALTER SESSION
+CREATE DATABASE LINK
+CREATE PROCEDURE
+CREATE SEQUENCE
+CREATE TABLE
+CREATE SESSION
+CREATE TYPE
+CREATE VIEW
+CREATE TRIGGER
+
+11 rows selected.
+
+SQL>
+The actual creation of the recovery catalog is performed in RMAN while connected to the database in which the catalog is to be created. The command CREATE CATALOG will create the recovery catalog in the default table space of the user. If you need to store the catalog in a table space other than the users default table space you can provide the table space name using TABLESPACE.
+C:\Users\rajjha>rman target / catalog rcat@CATDB
+Recovery Manager: Release 11.2.0.1.0 – Production on Mon Jul 8 23:33:23 2013
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+connected to target database: CATDB (DBID=2365959513)
+recovery catalog database Password:
+connected to recovery catalog database
+
+RMAN> create catalog tablespace rec_catalog;
+recovery catalog created
+To the new database to be backed up, you have to register it on the rman catalog you just created: (Fon any new database you can use this catalog after register database in catalog)
+RMAN>  register database;
+database registered in recovery catalog
+starting full resync of recovery catalog
+full resync complete
+RMAN>
+Configure the persistent parameters.
+RMAN> configure retention policy to recovery window of 2 days;
+starting full resync of recovery catalog
+full resync complete
+new RMAN configuration parameters:
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 2 DAYS;
+new RMAN configuration parameters are successfully stored
+starting full resync of recovery catalog
+full resync complete
+RMAN> configure default device type to disk;
+new RMAN configuration parameters:
+CONFIGURE DEFAULT DEVICE TYPE TO DISK;
+new RMAN configuration parameters are successfully stored
+starting full resync of recovery catalog
+full resync complete
+RMAN> configure controlfile autobackup on;
+new RMAN configuration parameters:
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+new RMAN configuration parameters are successfully stored
+starting full resync of recovery catalog
+full resync complete
+RMAN>
+RMAN> configure channel device type disk format ‘D:\oraclebackup\Backup%d_DB_%U_%S_%P’;
+starting full resync of recovery catalog
+full resync complete
+new RMAN configuration parameters:
+CONFIGURE CHANNEL DEVICE TYPE DISK FORMAT   ‘D:\oraclebackup\Backup%d_DB_%U_%S_%P’;
+new RMAN configuration parameters are successfully stored
+starting full resync of recovery catalog
+full resync complete
+Take database full backup. The full database backup should be taken first time. Afterwards you can use Incremental, Full or archivelog backup depend on your backup policy as well as space available.
+C:\Users\rajjha>rman target / catalog rcat/password@CATDB
+RMAN> run{
+backup database plus archivelog;
+delete noprompt obsolete;
+}
+RMAN> exit
+Now the RMAN setup is completed successfully. Here is the info about RMAN.
+Primary DB = MYDB
+Catalog DB = CATDB
+RMAN Backup location = D:\oraclebackup.
+Now take the full backup. Every day run the below script that backup the new archive log files. You may run through scheduler
+C:\Users\rajjha>rman target / catalog rcat@CATDB
+RMAN> run{
+delete noprompt obsolete;
+backup archivelog all;
+}
+RMAN> exit
