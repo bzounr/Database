@@ -1,0 +1,688 @@
+Microsoft Windows XP [Version 5.1.2600]
+(C) Copyright 1985-2001 Microsoft Corp.
+
+C:\Documents and Settings\fahad>rman target /
+
+Recovery Manager: Release 10.2.0.1.0 - Production on Mon Jun 2 11:28:27 2014
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+connected to target database (not started)
+
+RMAN> startup nomount
+
+Oracle instance started
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                171969436 bytes
+Database Buffers             427819008 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN>
+RMAN> restore controlfile from 'c:\oracle\rmanbackup\O1_MF_S_848940768_9RJW8JVT_
+.BKP';
+
+Starting restore at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=156 devtype=DISK
+
+channel ORA_DISK_1: restoring control file
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:04
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL01.CTL
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL02.CTL
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL03.CTL
+Finished restore at 02-JUN-14
+
+RMAN> startup force mount;
+
+Oracle instance started
+database mounted
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of startup command at 06/02/2014 10:55:59
+RMAN-06189: current DBID 2992263467 does not match target mounted database (2991
+919430)
+
+RMAN> startup mount;
+
+database is already started
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of startup command at 06/02/2014 10:56:23
+RMAN-06189: current DBID 2992263467 does not match target mounted database (2991
+919430)
+
+RMAN> shutdown immediate
+
+database dismounted
+Oracle instance shut down
+
+RMAN> startup force mount;
+
+Oracle instance started
+database mounted
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of startup command at 06/02/2014 10:56:45
+RMAN-06189: current DBID 2992263467 does not match target mounted database (2991
+919430)
+
+RMAN> shutdown immediate
+
+database dismounted
+Oracle instance shut down
+
+RMAN>
+
+RMAN>
+
+RMAN> startup nomount
+
+connected to target database (not started)
+Oracle instance started
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> set dbib 2991919430
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> set dbib 2991919430;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> set dbib = 2991919430;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> set dbib=2991919430
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "equal": expecting one of: "allocate, alter, bac
+kup, beginline, blockrecover, catalog, change, connect, copy, convert, create, c
+rosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback
+, host, {, library, list, mount, open, print, quit, recover, register, release,
+replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, s
+etlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upg
+rade, unregister, validate"
+RMAN-01007: at line 1 column 9 file: standard input
+
+RMAN> set dbib=2991919430;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "equal": expecting one of: "allocate, alter, bac
+kup, beginline, blockrecover, catalog, change, connect, copy, convert, create, c
+rosscheck, configure, duplicate, debug, delete, drop, exit, endinline, flashback
+, host, {, library, list, mount, open, print, quit, recover, register, release,
+replace, report, renormalize, reset, restore, resync, rman, run, rpctest, set, s
+etlimit, sql, switch, spool, startup, shutdown, send, show, test, transport, upg
+rade, unregister, validate"
+RMAN-01007: at line 1 column 9 file: standard input
+
+RMAN> set dbib 2991919430
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> shutdown immediate
+
+Oracle instance shut down
+
+RMAN> exit
+
+
+Recovery Manager complete.
+
+C:\Documents and Settings\fahad>rman target /
+
+Recovery Manager: Release 10.2.0.1.0 - Production on Mon Jun 2 11:02:24 2014
+
+Copyright (c) 1982, 2005, Oracle.  All rights reserved.
+
+connected to target database (not started)
+
+RMAN> set dbib 2991919430;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> startup mount;
+
+Oracle instance started
+database mounted
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> set dbib 2991919430;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> set dbib = 2991919430;
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-00558: error encountered while parsing input commands
+RMAN-01009: syntax error: found "identifier": expecting one of: "archivelog, aux
+iliary, auxname, autolocate, autobackup, backup, command, controlfile, clonename
+, decryption, dbid, duplex, echo, encryption, high, limit, maxcorrupt, maxseq, n
+ewname, nocfau, parallelmediarestore, rpc, snapshot, until"
+RMAN-01008: the bad identifier was: dbib
+RMAN-01007: at line 1 column 5 file: standard input
+
+RMAN> shutdown immediate
+
+using target database control file instead of recovery catalog
+database dismounted
+Oracle instance shut down
+
+RMAN> SET DBID 2991919430;
+
+executing command: SET DBID
+
+RMAN> startup nomount
+
+connected to target database (not started)
+Oracle instance started
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> restore controlfile from 'c:\oracle\rmanbackup\O1_MF_S_848940768_9RJW8JVT_
+.BKP';
+
+Starting restore at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=156 devtype=DISK
+
+channel ORA_DISK_1: restoring control file
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:03
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL01.CTL
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL02.CTL
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL03.CTL
+Finished restore at 02-JUN-14
+
+RMAN>
+
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00001 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\SYSTEM01.DBF
+restoring datafile 00002 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\UNDOTBS01.DBF
+restoring datafile 00003 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\SYSAUX01.DBF
+restoring datafile 00004 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\USERS01.DBF
+restoring datafile 00005 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\RMAN_RCAT01.DBF
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of restore command at 06/02/2014 11:07:36
+ORA-19693: backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P alre
+ady included
+
+RMAN> shutdown immediate
+
+database dismounted
+Oracle instance shut down
+
+RMAN> startup mount;
+
+connected to target database (not started)
+Oracle instance started
+database mounted
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> catalog start with 'c:\oracle\rmanbackup';
+
+searching for all files that match the pattern c:\oracle\rmanbackup
+
+List of Files Unknown to the Database
+=====================================
+File Name: C:\ORACLE\rmanbackup\BACKUPK3_DB_0MP9JJMT_1_1_%S_%P
+File Name: C:\ORACLE\rmanbackup\O1_MF_1_11_9RJW8DBQ_.ARC
+File Name: C:\ORACLE\rmanbackup\O1_MF_S_848940768_9RJW8JVT_.BKP
+
+Do you really want to catalog the above files (enter YES or NO)? YES
+cataloging files...
+cataloging done
+
+List of Cataloged Files
+=======================
+File Name: C:\ORACLE\rmanbackup\BACKUPK3_DB_0MP9JJMT_1_1_%S_%P
+File Name: C:\ORACLE\rmanbackup\O1_MF_1_11_9RJW8DBQ_.ARC
+File Name: C:\ORACLE\rmanbackup\O1_MF_S_848940768_9RJW8JVT_.BKP
+
+RMAN> restore database;
+
+Starting restore at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=157 devtype=DISK
+
+channel ORA_DISK_1: starting datafile backupset restore
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00001 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\SYSTEM01.DBF
+restoring datafile 00002 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\UNDOTBS01.DBF
+restoring datafile 00003 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\SYSAUX01.DBF
+restoring datafile 00004 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\USERS01.DBF
+restoring datafile 00005 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\RMAN_RCAT01.DBF
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of restore command at 06/02/2014 11:09:42
+ORA-19693: backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P alre
+ady included
+
+RMAN> shutdown immediate
+
+database dismounted
+Oracle instance shut down
+
+RMAN> startup nomount;
+
+connected to target database (not started)
+Oracle instance started
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> restore controlfile from 'c:\oracle\rmanbackup\O1_MF_S_848940768_9RJW8JVT_
+.BKP';
+
+Starting restore at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=156 devtype=DISK
+
+channel ORA_DISK_1: restoring control file
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:03
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL01.CTL
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL02.CTL
+output filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\CONTROL03.CTL
+Finished restore at 02-JUN-14
+
+RMAN> startup mount;
+
+database is already started
+database mounted
+released channel: ORA_DISK_1
+
+RMAN> catalog start with 'c:\oracle\rmanbackup';
+
+Starting implicit crosscheck backup at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=156 devtype=DISK
+Crosschecked 16 objects
+Finished implicit crosscheck backup at 02-JUN-14
+
+Starting implicit crosscheck copy at 02-JUN-14
+using channel ORA_DISK_1
+Finished implicit crosscheck copy at 02-JUN-14
+
+searching for all files in the recovery area
+cataloging files...
+no files cataloged
+
+searching for all files that match the pattern c:\oracle\rmanbackup
+
+List of Files Unknown to the Database
+=====================================
+File Name: C:\ORACLE\rmanbackup\O1_MF_1_11_9RJW8DBQ_.ARC
+File Name: C:\ORACLE\rmanbackup\O1_MF_S_848940768_9RJW8JVT_.BKP
+
+Do you really want to catalog the above files (enter YES or NO)? YES
+cataloging files...
+cataloging done
+
+List of Cataloged Files
+=======================
+File Name: C:\ORACLE\rmanbackup\O1_MF_1_11_9RJW8DBQ_.ARC
+File Name: C:\ORACLE\rmanbackup\O1_MF_S_848940768_9RJW8JVT_.BKP
+
+RMAN> restore database;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of restore command at 06/02/2014 11:11:37
+RMAN-06026: some targets not found - aborting restore
+RMAN-06023: no backup or copy of datafile 4 found to restore
+RMAN-06023: no backup or copy of datafile 3 found to restore
+RMAN-06023: no backup or copy of datafile 2 found to restore
+RMAN-06023: no backup or copy of datafile 1 found to restore
+
+RMAN> restore datafile 1;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of restore command at 06/02/2014 11:12:09
+RMAN-06026: some targets not found - aborting restore
+RMAN-06023: no backup or copy of datafile 1 found to restore
+
+RMAN> restore datafile 1;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of restore command at 06/02/2014 11:12:37
+RMAN-06026: some targets not found - aborting restore
+RMAN-06023: no backup or copy of datafile 1 found to restore
+
+RMAN> shutdown immediate
+
+database dismounted
+Oracle instance shut down
+
+RMAN> startup force mount;
+
+Oracle instance started
+database mounted
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> catalog start with 'c:\oracle\rmanbackup';
+
+searching for all files that match the pattern c:\oracle\rmanbackup
+
+List of Files Unknown to the Database
+=====================================
+File Name: C:\ORACLE\rmanbackup\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P
+File Name: C:\ORACLE\rmanbackup\BACKUPK3_DB_0MP9JJMT_1_1_%S_%P
+File Name: C:\ORACLE\rmanbackup\O1_MF_1_11_9RJW8DBQ_.ARC
+File Name: C:\ORACLE\rmanbackup\O1_MF_S_848940768_9RJW8JVT_.BKP
+
+Do you really want to catalog the above files (enter YES or NO)? YES
+cataloging files...
+cataloging done
+
+List of Cataloged Files
+=======================
+File Name: C:\ORACLE\rmanbackup\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P
+File Name: C:\ORACLE\rmanbackup\BACKUPK3_DB_0MP9JJMT_1_1_%S_%P
+File Name: C:\ORACLE\rmanbackup\O1_MF_1_11_9RJW8DBQ_.ARC
+File Name: C:\ORACLE\rmanbackup\O1_MF_S_848940768_9RJW8JVT_.BKP
+
+RMAN> restore datafile 1;
+
+Starting restore at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=157 devtype=DISK
+
+channel ORA_DISK_1: starting datafile backupset restore
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00001 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\SYSTEM01.DBF
+channel ORA_DISK_1: reading from backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0
+LP9JJLO_1_1_%S_%P
+channel ORA_DISK_1: restored backup piece 1
+piece handle=C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P tag=TAG20140530
+T165208
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:26
+Finished restore at 02-JUN-14
+
+RMAN> restore datafile 2;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+channel ORA_DISK_1: starting datafile backupset restore
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00002 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\UNDOTBS01.DBF
+channel ORA_DISK_1: reading from backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0
+LP9JJLO_1_1_%S_%P
+channel ORA_DISK_1: restored backup piece 1
+piece handle=C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P tag=TAG20140530
+T165208
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:04
+Finished restore at 02-JUN-14
+
+RMAN> restore datafile 3;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+channel ORA_DISK_1: starting datafile backupset restore
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00003 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\SYSAUX01.DBF
+channel ORA_DISK_1: reading from backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0
+LP9JJLO_1_1_%S_%P
+channel ORA_DISK_1: restored backup piece 1
+piece handle=C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P tag=TAG20140530
+T165208
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:16
+Finished restore at 02-JUN-14
+
+RMAN> restore datafile 4;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+channel ORA_DISK_1: starting datafile backupset restore
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00004 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\USERS01.DBF
+channel ORA_DISK_1: reading from backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0
+LP9JJLO_1_1_%S_%P
+channel ORA_DISK_1: restored backup piece 1
+piece handle=C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P tag=TAG20140530
+T165208
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:02
+Finished restore at 02-JUN-14
+
+RMAN> restore datafile 5;
+
+Starting restore at 02-JUN-14
+using channel ORA_DISK_1
+
+channel ORA_DISK_1: starting datafile backupset restore
+channel ORA_DISK_1: specifying datafile(s) to restore from backup set
+restoring datafile 00005 to C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\RMAN_RCAT01.DBF
+channel ORA_DISK_1: reading from backup piece C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0
+LP9JJLO_1_1_%S_%P
+channel ORA_DISK_1: restored backup piece 1
+piece handle=C:\ORACLE\RMANBACKUP\BACKUPK3_DB_0LP9JJLO_1_1_%S_%P tag=TAG20140530
+T165208
+channel ORA_DISK_1: restore complete, elapsed time: 00:00:04
+Finished restore at 02-JUN-14
+
+RMAN>
+
+RMAN> recover database;
+
+Starting recover at 02-JUN-14
+using channel ORA_DISK_1
+RMAN-00571: ===========================================================
+RMAN-00569: =============== ERROR MESSAGE STACK FOLLOWS ===============
+RMAN-00571: ===========================================================
+RMAN-03002: failure of recover command at 06/02/2014 11:15:10
+ORA-19698: C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\REDO01.LOG is from different data
+base: id=2992263467, db_name=K3
+
+***************
+NOW EITHER RENAME REDO01 FILE WITH CURRENT DATABASE FROM OLD 
+OR SIMPLY COPY AND REPLACE ALL REDO FILE FROM OLD TO NEW DATABASE (IF EXISTS IN CASE OF NO CRASH RECOVERY)
+
+******************************
+
+NO CRASH RECOVERY - JUST SIMPLY COPY AND REPLACE REDO FROM OLD DATABASE TO
+TO NEW ONE
+
+
+IN CRASH RECOVERY
+----------------------
+
+RMAN> shutdown immediate
+
+database dismounted
+Oracle instance shut down
+
+RMAN> STARTUP mount
+
+connected to target database (not started)
+Oracle instance started
+database mounted
+
+Total System Global Area     608174080 bytes
+
+Fixed Size                     1250404 bytes
+Variable Size                167775132 bytes
+Database Buffers             432013312 bytes
+Redo Buffers                   7135232 bytes
+
+RMAN> recover database;
+
+Starting recover at 02-JUN-14
+allocated channel: ORA_DISK_1
+channel ORA_DISK_1: sid=157 devtype=DISK
+
+starting media recovery
+
+archive log thread 1 sequence 11 is already on disk as file C:\ORACLE\PRODUCT\10
+.2.0\ORADATA\K3\REDO01.LOG
+archive log thread 1 sequence 12 is already on disk as file C:\ORACLE\PRODUCT\10
+.2.0\ORADATA\K3\REDO02.LOG
+archive log filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\REDO01.LOG thread=1 seq
+uence=11
+archive log filename=C:\ORACLE\PRODUCT\10.2.0\ORADATA\K3\REDO02.LOG thread=1 seq
+uence=12
+media recovery complete, elapsed time: 00:00:04
+Finished recover at 02-JUN-14
+
+RMAN> alter database open resetlogs;
+
+database opened
+
+RMAN>
+
+
